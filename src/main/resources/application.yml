@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: marionete-god
+  main:
+    banner-mode: off
+  ai:
+    mcp:
+      server:
+        name: marionete-god
+        version: 0.1.0
+        type: sync
+        protocol: streamable
+        capabilities:
+          tool: true
+          resource: false
+          prompt: false
+          completion: false
+        instructions: >
+          Controle de um celular Android por adb. Comece por ler_tela: ela devolve os elementos da tela com
+          um número de referência, e tocar aceita esse número. Use capturar_tela só quando ler_tela vier vazia
+          ou não bastar (jogos, Flutter, imagens). Depois de cada ação, leia a tela de novo antes de decidir o
+          próximo passo. Se uma ferramenta recusar por política, não tente contornar: diga ao usuário o motivo.
+
+# Tudo abaixo pode vir de variável de ambiente: MARIONETE_MODO, MARIONETE_ADB, MARIONETE_SERIAL,
+# MARIONETE_APPS_NEGADOS (separados por vírgula), MARIONETE_PASTA.
+marionete:
+  modo: ${MARIONETE_MODO:padrao}
+  adb: ${MARIONETE_ADB:adb}
+  serial: ${MARIONETE_SERIAL:}
+  pasta: ${MARIONETE_PASTA:${user.home}/.marionete-god}
+
+server:
+  port: ${PORT:8080}

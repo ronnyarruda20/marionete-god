@@ -1,0 +1,16 @@
+# Perfil para clientes que iniciam o servidor como processo local (Claude Code, Claude Desktop).
+# No modo stdio, stdout é o canal do protocolo: nada de banner nem log no console.
+spring:
+  main:
+    web-application-type: none
+    banner-mode: off
+  ai:
+    mcp:
+      server:
+        stdio: true
+
+logging:
+  threshold:
+    console: "OFF"
+  file:
+    name: ${java.io.tmpdir}/marionete-god.log
